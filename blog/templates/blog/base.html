@@ -9,6 +9,8 @@
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     </head>
     <body>
+        <a href="{% url 'post_list' %}">Home</a><br/>
+        <a href="{% url 'post_new' %}">Dodaj post</a><br/>
         {% block content %}
         {% endblock %}
     </body>
