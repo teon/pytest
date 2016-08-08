@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import re
 
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
@@ -14,5 +15,10 @@ class Post(models.Model):
         self.published_date = timezone.now()
         self.save()
     
+    def is_valid(self):
+        title_regex = re.compile("[a-zA-Z]+")
+        valid = title_regex.match(self.title)
+        return bool(valid)
+
     def __str__(self):
         return self.title
