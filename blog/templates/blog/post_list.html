@@ -1,15 +1,12 @@
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>First page</title>
-    </head>
-    <body>
-        {% for post in posts %}
-        <div>
-            <h1><a href="">{{ post.title }}</a></h1>
-            <p>{{ post.text|linebreaksbr }}</p>
-            <p>published: {{ post.published_date }} </p>
-        </div>
-        {% endfor %}
-    </body>
-</html>
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+    <div>
+        <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+        <p>{{ post.text|linebreaksbr }}</p>
+        <p>published: {{ post.published_date }} </p>
+    </div>
+    {% endfor %}
+
+{% endblock content %}
