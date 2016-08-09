@@ -9,8 +9,15 @@
         <link href="//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext" rel="stylesheet" type="text/css">
     </head>
     <body>
+        {% if user.is_authenticated %}
+        <p>Hello {{user.username}}!
+        <a href="{% url 'logout' %}">Log out</a></p><br/>
+        <a href="{% url 'post_new' %}">Add Post</a><br/>
+        {% else %}
+        <a href="{% url 'login' %}">Login</a><br/>
+        <a href="{% url 'register' %}">Register</a><br/>
+        {% endif %}
         <a href="{% url 'post_list' %}">Home</a><br/>
-        <a href="{% url 'post_new' %}">Dodaj post</a><br/>
         {% block content %}
         {% endblock %}
     </body>
