@@ -8,10 +8,11 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django.views.generic.edit import UpdateView
 from django.views.generic.edit import DeleteView
+from django.db.models import Q
 
 class PostListView(ListView):
     #model = Post
-    queryset = Post.objects.filter(published_date__lte = timezone.now())
+    queryset = Post.objects.filter(~Q(published_date = None))
     template_name = 'blog/post_list.html'
 
 class PostDetailView(DetailView):
