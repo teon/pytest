@@ -2,6 +2,11 @@ from django.db import models
 from django.utils import timezone
 import re
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     author = models.ForeignKey('auth.User')
     title = models.CharField(max_length=200)
@@ -10,6 +15,7 @@ class Post(models.Model):
             default=timezone.now)
     published_date = models.DateTimeField(
             blank=True, null=True)
+    tags = models.ManyToManyField(Tag)
 
     class Meta:
         ordering = ["-published_date"]
