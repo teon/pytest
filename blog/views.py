@@ -20,6 +20,9 @@ class PostListView(ListView):
         tag = request.GET.get('tag', None)
         if tag:
             self.queryset = self.queryset.filter(tags__name = tag)
+        name = request.GET.get('name', None)
+        if name:
+            self.queryset = self.queryset.filter(title__contains = name)
 
         return render(request, self.template_name, {'post_list': self.queryset})
 
