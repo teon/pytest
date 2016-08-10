@@ -1,7 +1,8 @@
 FROM python:latest
-ADD . .
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
 RUN pip install -r requirements.txt
-RUN python3 manage.py migrate
-RUN python3 manage.py collectstatic --noinput
-CMD python3 manage.py runserver 0.0.0.0:8000
-
+ADD . /code/
+RUN python /code/manage.py migrate
+RUN python /code/manage.py collectstatic --noinput
